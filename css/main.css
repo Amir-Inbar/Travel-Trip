@@ -26,8 +26,12 @@ body {
   flex-grow: 2;
 }
 
-.travel-container .list {
+.travel-container .sidebar {
   flex-grow: 1;
+}
+
+.travel-container .weather {
+  height: 200px;
 }
 
 .travel-container .list .item {
