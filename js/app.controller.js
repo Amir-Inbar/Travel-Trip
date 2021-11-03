@@ -45,7 +45,7 @@ function onPaginationClick(idx = 0) {
             <div>    
             <h1>${place.name}</h1>
             <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
-            <div>Temp:${place.weather}</div>
+            <div>Temp:&#8451;${place.weather}</div>
             </div>
             <span onclick="onRemoveLocation(${place.id})">X</span>
         </div>
