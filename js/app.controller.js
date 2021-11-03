@@ -61,20 +61,16 @@ function renderLocs() {
 	var strHmtl = `<div class="weather"></div>`;
 	const elSideBar = document.querySelector('.sidebar');
 	locService.getLocs().then((locations) => {
-		console.log(locations);
 		locations.forEach((place) => {
-			console.log(place);
 			strHmtl += `
-            <div class="item onclick="onPanto(${(place.lan, place.lng)})">
+            <div class="item" onclick="onPanto(${place.lat},${place.lng})">
             <span onclick="onRemoveLocation()">X</span>
-        <img src="${place.img}">
-        <div>    
+        <img src="${place.img}">    
 		<h1>${place.name}</h1>
-        <div>${place.lan} , ${place.lng}</div>
+        <div>${place.lat} , ${place.lng}</div>
         <div>${place.weather}</div>
         <div>Create At:${place.createdAt} Last Update: ${place.lastupdate}</div>
 		</div>
-        </div>
         `;
 		});
 		elSideBar.innerHTML = strHmtl;
