@@ -51,9 +51,10 @@ function onGetUserPos() {
 			console.log('err!!!', err);
 		});
 }
-function onPanTo() {
+function onPanTo(lan, lng) {
 	console.log('Panning the Map');
-	mapService.panTo(35.6895, 139.6917);
+	mapService.panTo(lan, lng);
+	renderLocs();
 }
 
 function renderLocs() {
@@ -64,12 +65,16 @@ function renderLocs() {
 		locations.forEach((place) => {
 			console.log(place);
 			strHmtl += `
-            <div class="item">
-        <img src="${place.img}">    
+            <div class="item onclick="onPanto(${(place.lan, place.lng)})">
+            <span onclick="onRemoveLocation()">X</span>
+        <img src="${place.img}">
+        <div>    
 		<h1>${place.name}</h1>
-        <span>${place.lan} , ${place.lng}</span><span>${place.weather}</span>
-        <span>Create At:${place.createdAt} Last Update: ${place.lastupdate}</span>
+        <div>${place.lan} , ${place.lng}</div>
+        <div>${place.weather}</div>
+        <div>Create At:${place.createdAt} Last Update: ${place.lastupdate}</div>
 		</div>
+        </div>
         `;
 		});
 		elSideBar.innerHTML = strHmtl;
