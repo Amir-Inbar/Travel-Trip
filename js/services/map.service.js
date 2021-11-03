@@ -1,3 +1,5 @@
+import { locService } from './loc.service.js';
+
 export const mapService = {
 	initMap,
 	addMarker,
@@ -16,6 +18,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 		});
 		gMap.addListener('click', (e) => {
 			addMarker(e.latLng);
+			locService.addLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now());
 		});
 		console.log('Map!', gMap);
 	});
