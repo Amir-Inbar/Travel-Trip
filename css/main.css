@@ -67,6 +67,7 @@ body {
 
 .travel-container .item {
   display: flex;
+  /* flex-direction: column; */
   min-height: 100px;
   background-color: whitesmoke;
   margin: 10px;
@@ -93,8 +94,12 @@ body {
   margin: 0 10px;
 }
 
-.travel-container .sidebar .item > div > div {
-  font-size: 0.8rem;
+.travel-container .sidebar .item > div > div:nth-child(2) {
+  font-size: 0.7em;
+}
+
+.travel-container .sidebar .item > div > div:not(:nth-child(2)) {
+  font-size: 0.9em;
 }
 
 .travel-container .pagination-navigator {
@@ -120,7 +125,7 @@ footer {
   }
 
   .travel-container .sidebar {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   }
 
   .travel-container .weather {
