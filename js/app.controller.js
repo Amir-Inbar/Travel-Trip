@@ -9,13 +9,14 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.renderLocs = renderLocs;
+window.onRemoveLocation = onRemoveLocation;
 
 function onInit() {
 	mapService
 		.initMap()
 		.then(() => {
 			console.log('Map is ready');
-			renderMap();
+			renderLocs();
 		})
 		.catch(() => console.log('Error: cannot init map'));
 	pageService.set(1, 10, 8);
@@ -65,7 +66,7 @@ function renderLocs() {
 		locations.forEach((place) => {
 			strHmtl += `
             <div class="item" onclick="onPanTo(${place.lat},${place.lng})">
-            <span onclick="onRemoveLocation()">X</span>
+            <span onclick="onRemoveLocation(${place.id})">X</span>
         <img src="${place.img}">
         <div>    
 		<h1>${place.name}</h1>
@@ -84,5 +85,10 @@ function renderLocs() {
 function onAddLocation() {
 	const placeName = prompt('Write your place');
 	locService.addLocation(placeName);
+	renderLocs();
+}
+
+function onRemoveLocation(placeId) {
+	locService.removeLocation(placeId);
 	renderLocs();
 }

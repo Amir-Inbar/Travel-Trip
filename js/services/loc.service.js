@@ -3,12 +3,13 @@ import { storService } from './storage.service.js';
 export const locService = {
 	getLocs,
 	setLocation,
-	addLocation
+	addLocation,
+	removeLocation
 };
 
 var id = 0;
-const locs = [];
 const KEY = 'saveLoc';
+const locs = storService.load(KEY) || [];
 var tempLoc;
 
 function getLocs() {
@@ -41,4 +42,13 @@ function addLocation(title) {
 	locs.push(tempLoc);
 	storService.save(KEY, locs);
 	tempLoc = null;
+}
+
+function removeLocation(placeId) {
+	const place = findPlaceByid(placeId);
+	locs.splice(place, 1);
+}
+
+function findPlaceByid(placeId) {
+	return locs.find((location) => location.id === placeId);
 }
