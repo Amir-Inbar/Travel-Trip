@@ -6,18 +6,31 @@ body {
   margin: 0;
 }
 
+.grid {
+  display: grid;
+}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
 }
 
-.align-center {
+.flex.align-center {
   align-items: center;
   justify-content: center;
 }
 
+.flex.column {
+  flex-direction: column;
+}
+
+.main-content {
+  margin: auto;
+  max-width: 980px;
+}
+
 .travel-container {
-  background-color: lightsteelblue;
+  background-color: transparent;
 }
 
 .travel-container #map {
@@ -31,10 +44,13 @@ body {
 }
 
 .travel-container .weather {
-  height: 200px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: lightskyblue;
+  height: 220px;
 }
 
-.travel-container .list .item {
+.travel-container .item {
   min-height: 100px;
   background-color: whitesmoke;
   margin: 10px;
@@ -46,4 +62,31 @@ body {
   justify-content: center;
   width: 100%;
   height: 2.5rem;
+}
+
+@media screen and (max-width: 760px) {
+  .travel-container {
+    flex-direction: column;
+  }
+
+  .travel-container #map {
+    min-height: 320px;
+  }
+
+  .travel-container .sidebar {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+
+  .travel-container .weather {
+    grid-column: 2/3;
+    grid-row: 1/3;
+  }
+
+  .travel-container .item:nth-child(2) {
+    grid-row: 1;
+    grid-column: 1/2;
+  }
+}
+
+@media screen and (min-width: 760px) {
 }
