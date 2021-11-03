@@ -21,8 +21,8 @@
             elCheckBox.checked = !(elCheckBox.checked);
         }
 
-        // const elInput = document.querySelector('.main-header nav');
-        // if (elInput.querySelector('.checkbox')) elInput.innerHTML = `<input type="checkbox" /><span></span><span></span><span></span>${elInput.innerHTML}`;
+        const elInput = document.querySelector('.main-header nav');
+        if (!elInput.querySelector('.checkbox')) elInput.innerHTML = `<input type="checkbox" /><span></span><span></span><span></span>${elInput.innerHTML}`;
 
         const elItems = document.querySelectorAll('.main-header nav ul li');
         elItems.forEach(item => {
