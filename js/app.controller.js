@@ -8,6 +8,7 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
+window.renderLocs = renderLocs;
 
 function onInit() {
 	mapService
@@ -17,7 +18,7 @@ function onInit() {
 			renderMap();
 		})
 		.catch(() => console.log('Error: cannot init map'));
-	pageService.render(1, 10, 8);
+	pageService.set(1, 10, 8);
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -55,16 +56,28 @@ function onPanTo() {
 	mapService.panTo(35.6895, 139.6917);
 }
 
-function renderMap() {
-	let strHmtl = `<div class="weather"></div>`;
-	const placeCards = document.querySelector('.sidebar');
-	const locs = onGetLocs();
-	console.log(locs);
-	placeCards.forEach((place) => {
-		// 	strHmtl += `
-		// <span>
-		// `;
+function renderLocs() {
+	var strHmtl = `<div class="weather"></div>`;
+	const elSideBar = document.querySelector('.sidebar');
+	locService.getLocs().then((locations) => {
+		console.log(locations);
+		locations.forEach((place) => {
+			console.log(place);
+			strHmtl += `
+            <div class="item">
+        <img src="${place.img}">    
+		<h1>${place.name}</h1>
+        <span>${place.lan} , ${place.lng}</span><span>${place.weather}</span>
+        <span>Create At:${place.createdAt} Last Update: ${place.lastupdate}</span>
+		</div>
+        `;
+		});
+		elSideBar.innerHTML = strHmtl;
 	});
 }
 
-function onAddLocation() {}
+function onAddLocation() {
+	const placeName = prompt('Write your place');
+	locService.addLocation(placeName);
+	renderLocs();
+}

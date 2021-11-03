@@ -5,6 +5,7 @@ export const mapService = {
 	addMarker,
 	panTo
 };
+const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
 
 var gMap;
 var gMarker;
@@ -18,7 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 		});
 		gMap.addListener('click', (e) => {
 			addMarker(e.latLng);
-			locService.addLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now());
+			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now(), API_KEY);
 		});
 		console.log('Map!', gMap);
 	});
@@ -41,7 +42,6 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
 	if (window.google) return Promise.resolve();
-	const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
 	var elGoogleApi = document.createElement('script');
 	elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
 	elGoogleApi.async = true;

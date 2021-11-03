@@ -2,12 +2,14 @@ import { storService } from './storage.service.js';
 
 export const locService = {
 	getLocs,
+	setLocation,
 	addLocation
 };
 
 var id = 0;
 const locs = [];
 const KEY = 'saveLoc';
+var tempLoc;
 
 function getLocs() {
 	return new Promise((resolve, reject) => {
@@ -17,7 +19,7 @@ function getLocs() {
 	});
 }
 
-function addLocation(name, lat, lng, lastUpdateAt) {
+function setLocation(name, lat, lng, lastUpdateAt, api) {
 	const location = {
 		id: id++,
 		name,
@@ -25,8 +27,18 @@ function addLocation(name, lat, lng, lastUpdateAt) {
 		lng,
 		weather: null,
 		createAt: Date.now(),
-		lastUpdateAt
+		lastUpdateAt,
+		img: `
+        https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=12&size=200x100&key=${api}
+        `
 	};
-	locs.push(location);
+	tempLoc = location;
+}
+
+function addLocation(title) {
+	if (!tempLoc) return;
+	tempLoc.name = title;
+	locs.push(tempLoc);
 	storService.save(KEY, locs);
+	tempLoc = null;
 }
