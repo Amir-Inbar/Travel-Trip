@@ -1,9 +1,7 @@
-window.pagination = renderPagination;
-
 export const pageService = {
-    setLength,
+    set: renderPagination,
+    setLength: setNumberOfItems,
     setPageSize: setItemsPerPage,
-    render: renderPagination,
 }
 
 var paginationLength = 10;
@@ -21,7 +19,7 @@ if (!document.getElementById(id)) {
     head.appendChild(link);
 }
 
-function setLength(length) {
+function setNumberOfItems(length) {
     paginationLength = length;
 }
 
