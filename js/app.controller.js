@@ -18,7 +18,7 @@ function onInit() {
 		.initMap()
 		.then(() => {
 			console.log('Map is ready');
-			onToggleNewLoaction();
+			onToggleNewLoaction(0);
 			locService.getLocs().then((locations) => {
 				gLocs = locations;
 				onPaginationClick();
@@ -73,6 +73,7 @@ function onGetUserPos() {
 			console.log('User position is:', pos.coords);
 			document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords
 				.longitude}`;
+			mapService.panTo(pos.coords.latitude, pos.coords.longitude);
 		})
 		.catch((err) => {
 			console.log('err!!!', err);
@@ -88,6 +89,7 @@ function onPanTo(lat, lng) {
 function onAddLocation() {
 	const placeName = prompt('Write your place');
 	locService.addLocation(placeName);
+	onToggleNewLoaction(0);
 	onPaginationClick();
 }
 
@@ -102,4 +104,9 @@ function onToggleNewLoaction(placeId) {
 	else {
 		document.querySelector('.add-loc').classList.remove('hide');
 	}
+}
+
+function initAutocomplete() {
+	var service = new google.maps.places.AutocompleteService();
+	service.getQueryPredictions({ input: 'pizza in New York' }, displaySuggestions);
 }

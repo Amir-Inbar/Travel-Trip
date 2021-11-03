@@ -18,6 +18,7 @@
     </header>
     <div class="travel-container flex main-content">
         <div class="map-container">
+            <input class="autocomplete" name="autocomplete" type="text">
             <div id="map"></div>
             <img class="add-loc" onclick="onAddLocation()" src="./img/add.png">
         </div>
@@ -35,14 +36,16 @@
     <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
     <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
-
+    
     <p>You are at: <span class="user-pos"></span></p>
     <p>Locations: <span class="locs"></span></p>
 
     <footer>
         <p class="copyrights">© Copyrights</p>
     </footer>
-
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ&libraries=places&callback=initMap">
+</script>
     <script type="module" src="js/app.controller.js"></script>
     <script src="js/navbar.controller.js"></script>
 </body>
