@@ -1,13 +1,12 @@
 export const locService = {
-	getLocs
+	getLocs,
+	addLocation
 };
 import { storService } from './storage.service.js';
 
-const id = 0;
-const locs = [
-	// { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-	// { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
-];
+var id = 0;
+const locs = [];
+const KEY = 'saveLoc';
 
 function getLocs() {
 	return new Promise((resolve, reject) => {
@@ -17,7 +16,7 @@ function getLocs() {
 	});
 }
 
-function addLocation(name, { lat, lng }, lastUpdateAt) {
+function addLocation(name, lat, lng, lastUpdateAt) {
 	const location = {
 		id: id++,
 		name,
@@ -28,4 +27,5 @@ function addLocation(name, { lat, lng }, lastUpdateAt) {
 		lastUpdateAt
 	};
 	locs.push(location);
+	storService.save(KEY, locs);
 }
