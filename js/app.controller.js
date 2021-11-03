@@ -8,9 +8,9 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
-window.renderLocs = renderLocs;
 window.onRemoveLocation = onRemoveLocation;
 window.toggleNewLoactionIcon = toggleNewLoactionIcon;
+window.onPaginationClick = onPaginationClick;
 
 function onInit() {
 	mapService
@@ -18,13 +18,32 @@ function onInit() {
 		.then(() => {
 			console.log('Map is ready');
 			toggleNewLoactionIcon();
-			renderLocs();
+			onPaginationClick();
 		})
 		.catch(() => console.log('Error: cannot init map'));
-	pageService.set(1, 10, 8);
 }
-function onPaginationClick(idx) {
-	const locations = getLocs();
+function onPaginationClick(idx = 0) {
+	var strHmtl = `<div class="weather"></div>`;
+	const elSideBar = document.querySelector('.sidebar');
+	locService.getLocs().then((locations) => {
+		locations = pageService.set(idx, 4, locations);
+		locations.forEach((place) => {
+			strHmtl += `
+            <div class="item" onclick="onPanTo(${place.lat},${place.lng}),toggleNewLoactionIcon(${place.id})">
+            <span onclick="onRemoveLocation(${place.id})">X</span>
+        <img src="${place.img}">
+        <div>    
+		<h1>${place.name}</h1>
+        <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
+        <div>${place.weather}</div>
+        <div>Create At:${place.createdAt} </div>
+        <div>Last Update: ${place.lastUpdate}</div>
+        </div>
+        </div>
+        `;
+		});
+		elSideBar.innerHTML = strHmtl;
+	});
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -61,42 +80,19 @@ function onPanTo(lat, lng) {
 	console.log('Panning the Map');
 	mapService.panTo(lat, lng);
 	onAddMarker(lat, lng);
-	renderLocs();
-}
-
-function renderLocs() {
-	var strHmtl = `<div class="weather"></div>`;
-	const elSideBar = document.querySelector('.sidebar');
-	locService.getLocs().then((locations) => {
-		locations.forEach((place) => {
-			strHmtl += `
-            <div class="item" onclick="onPanTo(${place.lat},${place.lng}),toggleNewLoactionIcon(${place.id})">
-            <span onclick="onRemoveLocation(${place.id})">X</span>
-        <img src="${place.img}">
-        <div>    
-		<h1>${place.name}</h1>
-        <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
-        <div>${place.weather}</div>
-        <div>Create At:${place.createdAt} </div>
-        <div>Last Update: ${place.lastUpdate}</div>
-        </div>
-        </div>
-        `;
-		});
-		elSideBar.innerHTML = strHmtl;
-	});
+	onPaginationClick();
 }
 
 function onAddLocation() {
 	const placeName = prompt('Write your place');
 	locService.addLocation(placeName);
 	toggleNewLoactionIcon();
-	renderLocs();
+	onPaginationClick();
 }
 
 function onRemoveLocation(placeId) {
 	locService.removeLocation(placeId);
-	renderLocs();
+	onPaginationClick();
 }
 
 function toggleNewLoactionIcon(placeId) {
