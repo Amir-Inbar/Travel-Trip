@@ -7,19 +7,28 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <h1>TravelTip Starter</h1>
-    <div class="travel-container flex">
+    <header class="header-container">
+        <div class="main-container main-header main-content">
+            <div class="logo">Travel Tip !</div>
+            <nav>
+                <input type="checkbox" /><span></span><span></span><span></span>
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="travel-container flex main-content">
         <div id="map"></div>
-        <div class="list">
-            <div class="item">kkk</div>
-            <div class="item">kkk</div>
-            <div class="item">kkk</div>
-            <div class="item">kkk</div>
-            <div class="item">kkk</div>
-            <div class="item">kkk</div>
+        <div class="sidebar grid">
+            <div class="weather"></div>
+                <div class="item">kkk</div>
+                <div class="item">kkk</div>
+                <div class="item">kkk</div>
+                <div class="item">kkk</div>
         </div>
         <div class="pagination-navigator"></div>
     </div>
+    
     <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
     <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
@@ -29,5 +38,6 @@
     <p>Locations: <span class="locs"></span></p>
     
     <script type="module" src="js/app.controller.js"></script>
+    <script src="js/navbar.controller.js"></script>
 </body>
 </html>
