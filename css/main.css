@@ -158,6 +158,8 @@ body {
 }
 
 footer {
+  user-select: none;
+  color: darkblue;
   margin-block-start: 70px;
   text-align: center;
   background-color: lightsteelblue;
