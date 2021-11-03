@@ -4,7 +4,8 @@ export const locService = {
 	getLocs,
 	setLocation,
 	addLocation,
-	removeLocation
+	removeLocation,
+	findPlaceByid
 };
 
 var id = 0;
@@ -16,7 +17,7 @@ function getLocs() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve(locs);
-		}, 2000);
+		}, 100);
 	});
 }
 

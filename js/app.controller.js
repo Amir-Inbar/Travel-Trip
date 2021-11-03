@@ -9,7 +9,7 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.onRemoveLocation = onRemoveLocation;
-window.toggleNewLoactionIcon = toggleNewLoactionIcon;
+window.onToggleNewLoaction = onToggleNewLoaction;
 window.onPaginationClick = onPaginationClick;
 
 function onInit() {
@@ -29,7 +29,7 @@ function onPaginationClick(idx = 0) {
 		locations = pageService.set(idx, 4, locations);
 		locations.forEach((place) => {
 			strHmtl += `
-            <div class="item" onclick="onPanTo(${place.lat},${place.lng}),toggleNewLoactionIcon(${place.id})">
+            <div class="item" onclick="onPanTo(${place.lat},${place.lng}),onToggleNewLoaction(${place.id})">
             <span onclick="onRemoveLocation(${place.id})">X</span>
         <img src="${place.img}">
         <div>    
@@ -86,7 +86,6 @@ function onPanTo(lat, lng) {
 function onAddLocation() {
 	const placeName = prompt('Write your place');
 	locService.addLocation(placeName);
-	toggleNewLoactionIcon();
 	onPaginationClick();
 }
 
@@ -95,6 +94,10 @@ function onRemoveLocation(placeId) {
 	onPaginationClick();
 }
 
-function toggleNewLoactionIcon(placeId) {
-	document.querySelector('.add-loc').classList.toggle('hide');
+function onToggleNewLoaction(placeId) {
+	const place = locService.findPlaceByid(placeId);
+	if (place) document.querySelector('.add-loc').classList.add('hide');
+	else {
+		document.querySelector('.add-loc').classList.remove('hide');
+	}
 }
