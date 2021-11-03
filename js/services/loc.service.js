@@ -19,17 +19,17 @@ function getLocs() {
 	});
 }
 
-function setLocation(name, lat, lng, lastUpdateAt = Date.now(), api) {
+function setLocation(name, lat, lng, createdAt = Date.now(), api) {
 	const location = {
 		id: id++,
 		name,
 		lat,
 		lng,
 		weather: null,
-		createAt: Date.now(),
-		lastUpdateAt,
+		createdAt: new Date().toUTCString(),
+		lastUpdate: Date.now(),
 		img: `
-        https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=12&size=200x100&key=${api}
+        https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=12&size=150x100&key=${api}
         `
 	};
 	tempLoc = location;

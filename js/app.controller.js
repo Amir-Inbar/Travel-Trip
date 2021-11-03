@@ -63,15 +63,16 @@ function renderLocs() {
 	locService.getLocs().then((locations) => {
 		locations.forEach((place) => {
 			strHmtl += `
-            <div class="item" onclick="onPanto(${place.lat},${place.lng})">
+            <div class="item" onclick="onPanTo(${place.lat},${place.lng})">
             <span onclick="onRemoveLocation()">X</span>
         <img src="${place.img}">
         <div>    
 		<h1>${place.name}</h1>
-        <div>${place.lat} , ${place.lng}</div>
+        <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
         <div>${place.weather}</div>
-        <div>Create At:${place.createdAt} Last Update: ${place.lastupdate}</div>
-		</div>
+        <div>Create At:${place.createdAt} </div>
+        <div>Last Update: ${place.lastUpdate}<div>
+        </div>
         </div>
         `;
 		});
