@@ -26,10 +26,10 @@ function setItemsPerPage(num) {
     itemsPerPage = num;
 }
 
-function getPagination(index = 1, size = itemsPerPage, items = []) {
+function getPagination(index = 0, size = itemsPerPage, items = []) {
     if (!items || !items.length) return;
     items = items.slice();
-    const length = items.length;
+    const length = Math.ceil(items.length / size);
     const page = {
         start() {
             const SIZE = Math.floor(size / 2);
@@ -51,6 +51,6 @@ function getPagination(index = 1, size = itemsPerPage, items = []) {
     }
     strHtml += (page.next) ? `<button onclick="onPaginationClick(${page.next})"> » </button>` : `<button class="pgndisabled"> » </button>`;
     document.querySelector('.pagination-navigator').innerHTML = strHtml;
-    return items.splice(page.start(), page.end());
+    return items.splice(index * size, size);
 }
 
