@@ -6,7 +6,6 @@ export const mapService = {
 	panTo
 };
 const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
-
 var gMap;
 var gMarker;
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -19,7 +18,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 		});
 		gMap.addListener('click', (e) => {
 			addMarker(e.latLng);
-			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now(), API_KEY);
+			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now());
 			onToggleNewLoaction();
 		});
 		console.log('Map!', gMap);

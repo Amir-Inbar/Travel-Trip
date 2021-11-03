@@ -30,8 +30,8 @@ function onInit() {
 		.catch(() => console.log('Error: cannot init map'));
 }
 function onPaginationClick(idx = 0) {
-	var strHmtl = `<div class="weather"></div>`;
-	const elSideBar = document.querySelector('.sidebar');
+	var strHmtl = '';
+	const elSideBar = document.querySelector('.sidebar .items');
 	const locations = pageService.set(idx, 4, gLocs);
 	if (!locations || !locations.length) return;
 	locations.forEach((place) => {
@@ -41,9 +41,9 @@ function onPaginationClick(idx = 0) {
             <div>    
             <h1>${place.name}</h1>
             <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
-            <div>${place.weather}</div>
             <div>Create At:${place.createdAt} </div>
             <div>Last Update: ${place.lastUpdate}</div>
+            <div>${place.weather}</div>
             </div>
             <span onclick="onRemoveLocation(${place.id})">X</span>
         </div>
