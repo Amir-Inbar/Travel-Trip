@@ -10,16 +10,21 @@ window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.renderLocs = renderLocs;
 window.onRemoveLocation = onRemoveLocation;
+window.toggleNewLoactionIcon = toggleNewLoactionIcon;
 
 function onInit() {
 	mapService
 		.initMap()
 		.then(() => {
 			console.log('Map is ready');
+			toggleNewLoactionIcon();
 			renderLocs();
 		})
 		.catch(() => console.log('Error: cannot init map'));
 	pageService.set(1, 10, 8);
+}
+function onPaginationClick(idx) {
+	const locations = getLocs();
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -65,7 +70,7 @@ function renderLocs() {
 	locService.getLocs().then((locations) => {
 		locations.forEach((place) => {
 			strHmtl += `
-            <div class="item" onclick="onPanTo(${place.lat},${place.lng})">
+            <div class="item" onclick="onPanTo(${place.lat},${place.lng}),toggleNewLoactionIcon(${place.id})">
             <span onclick="onRemoveLocation(${place.id})">X</span>
         <img src="${place.img}">
         <div>    
@@ -85,10 +90,15 @@ function renderLocs() {
 function onAddLocation() {
 	const placeName = prompt('Write your place');
 	locService.addLocation(placeName);
+	toggleNewLoactionIcon();
 	renderLocs();
 }
 
 function onRemoveLocation(placeId) {
 	locService.removeLocation(placeId);
 	renderLocs();
+}
+
+function toggleNewLoactionIcon(placeId) {
+	document.querySelector('.add-loc').classList.toggle('hide');
 }

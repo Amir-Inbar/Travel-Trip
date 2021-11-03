@@ -20,6 +20,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 		gMap.addListener('click', (e) => {
 			addMarker(e.latLng);
 			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now(), API_KEY);
+			toggleNewLoactionIcon();
 		});
 		console.log('Map!', gMap);
 	});
