@@ -22,8 +22,9 @@
                 Search: <input class="autocomplete" name="autocomplete" type="text">
             </label>
             <div id="map"></div>
-            <img class="my-loc" onclick="onGetUserPos()" src="./img/mylocation.png">
-            <img class="add-loc" onclick="onAddLocation()" src="./img/add.png">
+            <img class="my-loc" onclick="onGetUserPos()" src="./img/mylocation.png" title="Go to my location">
+            <img class="copy-clp" onclick="copyClipboard()" src="./img/clipboard.png" title="Copy link to current location">
+            <img class="add-loc" onclick="onAddLocation()" src="./img/add.png" title="Add current location to storage">
         </div>
         <div class="sidebar">
             <div class="weather"></div>

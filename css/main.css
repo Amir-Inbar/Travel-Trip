@@ -35,7 +35,7 @@ body {
 
 .travel-container {
   background-color: transparent;
-  min-height: 800px;
+  min-height: 600px;
 }
 
 .travel-container .autocomplete {
@@ -55,7 +55,8 @@ body {
 }
 
 .travel-container .map-container .my-loc,
-.travel-container .map-container .add-loc {
+.travel-container .map-container .add-loc,
+.travel-container .map-container .copy-clp {
   cursor: pointer;
   position: relative;
   height: 40px;
@@ -63,6 +64,12 @@ body {
   border-radius: 5px;
   opacity: 0.7;
   transition: 0.5s;
+}
+
+.travel-container .map-container .copy-clp {
+  padding: 6px;
+  top: -120px;
+  left: -35px;
 }
 
 .travel-container .map-container .my-loc {
@@ -73,10 +80,11 @@ body {
 
 .travel-container .map-container .add-loc {
   padding: 6px;
-  top: -120px;
-  left: -35px;
+  top: -170px;
+  left: -80px;
 }
 
+.travel-container .map-container .copy-clp:hover,
 .travel-container .map-container .my-loc:hover,
 .travel-container .map-container .add-loc:hover {
   transform: scale(115%);
