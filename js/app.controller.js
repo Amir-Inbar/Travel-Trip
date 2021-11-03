@@ -35,15 +35,15 @@ function onPaginationClick(idx = 0) {
 	locations.forEach((place) => {
 		strHmtl += `
             <div class="item" onclick="onPanTo(${place.lat},${place.lng}),onToggleNewLoaction(${place.id})">
+            <img src="${place.img}">
+            <div>    
+            <h1>${place.name}</h1>
+            <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
+            <div>${place.weather}</div>
+            <div>Create At:${place.createdAt} </div>
+            <div>Last Update: ${place.lastUpdate}</div>
+            </div>
             <span onclick="onRemoveLocation(${place.id})">X</span>
-        <img src="${place.img}">
-        <div>    
-		<h1>${place.name}</h1>
-        <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
-        <div>${place.weather}</div>
-        <div>Create At:${place.createdAt} </div>
-        <div>Last Update: ${place.lastUpdate}</div>
-        </div>
         </div>
         `;
 	});
@@ -76,6 +76,7 @@ function onGetUserPos() {
 			document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords
 				.longitude}`;
 			mapService.panTo(pos.coords.latitude, pos.coords.longitude);
+			onAddMarker(pos.coords.latitude, pos.coords.longitude);
 		})
 		.catch((err) => {
 			console.log('err!!!', err);
@@ -125,12 +126,19 @@ let autocomplete;
 function initAutocomplete() {
 	autocomplete = new google.maps.places.Autocomplete(document.querySelector('.autocomplete'), {
 		types: [ 'establishment' ],
-		componentRestrictions: { country: [ 'AU' ] },
+		componentRestrictions: { country: [ 'ISR' ] },
 		fields: [ 'place_id', 'geometry', 'name' ]
 	});
 	autocomplete.addListener('place_changed', onPlaceChanged);
 }
 
 function onPlaceChanged() {
-	console.log('s');
+	const place = autocomplete.getPlace();
+
+	if (!place.geometry) {
+		document.querySelector('.autocomplete').value = '';
+	} else {
+		console.log(place.geometry);
+		document.querySelector('.autocomplete').value = place.name;
+	}
 }
