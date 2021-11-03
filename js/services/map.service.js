@@ -5,7 +5,7 @@ export const mapService = {
 };
 
 var gMap;
-
+var gMarker;
 function initMap(lat = 32.0749831, lng = 34.9120554) {
 	console.log('InitMap');
 	return _connectGoogleApi().then(() => {
@@ -22,12 +22,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc) {
-	var marker = new google.maps.Marker({
+	if (gMarker) gMarker.setMap(null);
+	gMarker = new google.maps.Marker({
 		position: loc,
 		map: gMap,
 		title: 'Hello World!'
 	});
-	return marker;
+	return gMarker;
 }
 
 function panTo(lat, lng) {
