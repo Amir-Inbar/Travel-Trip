@@ -29,9 +29,9 @@ function getPosition() {
 	});
 }
 
-function onAddMarker() {
+function onAddMarker(lat, lng) {
 	console.log('Adding a marker');
-	mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+	mapService.addMarker({ lat: lat, lng: lng });
 }
 
 function onGetLocs() {
@@ -51,9 +51,10 @@ function onGetUserPos() {
 			console.log('err!!!', err);
 		});
 }
-function onPanTo(lan, lng) {
+function onPanTo(lat, lng) {
 	console.log('Panning the Map');
-	mapService.panTo(lan, lng);
+	mapService.panTo(lat, lng);
+	onAddMarker(lat, lng);
 	renderLocs();
 }
 
@@ -71,7 +72,7 @@ function renderLocs() {
         <div>${place.lat.toFixed(6)} , ${place.lng.toFixed(6)}</div>
         <div>${place.weather}</div>
         <div>Create At:${place.createdAt} </div>
-        <div>Last Update: ${place.lastUpdate}<div>
+        <div>Last Update: ${place.lastUpdate}</div>
         </div>
         </div>
         `;
