@@ -22,6 +22,19 @@
   padding-inline-start: 10px;
 }
 
+.main-header .logo {
+  animation: openlogo 3s;
+}
+
+@keyframes openlogo {
+  0% {
+    transform: scale(0%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+
 /* set clean-list on all ul */
 .main-header nav ul {
   list-style-type: none;
