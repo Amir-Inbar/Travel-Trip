@@ -65,12 +65,14 @@ function renderLocs() {
 			strHmtl += `
             <div class="item" onclick="onPanto(${place.lat},${place.lng})">
             <span onclick="onRemoveLocation()">X</span>
-        <img src="${place.img}">    
+        <img src="${place.img}">
+        <div>    
 		<h1>${place.name}</h1>
         <div>${place.lat} , ${place.lng}</div>
         <div>${place.weather}</div>
         <div>Create At:${place.createdAt} Last Update: ${place.lastupdate}</div>
 		</div>
+        </div>
         `;
 		});
 		elSideBar.innerHTML = strHmtl;

@@ -19,7 +19,7 @@ function getLocs() {
 	});
 }
 
-function setLocation(name, lat, lng, lastUpdateAt, api) {
+function setLocation(name, lat, lng, lastUpdateAt = Date.now(), api) {
 	const location = {
 		id: id++,
 		name,
