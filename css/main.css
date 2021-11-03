@@ -63,15 +63,38 @@ body {
   margin: 10px;
   border-radius: 5px;
   background-color: lightskyblue;
-  height: 220px;
 }
 
 .travel-container .item {
+  display: flex;
   min-height: 100px;
   background-color: whitesmoke;
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
+}
+
+.travel-container .item > span:first-child {
+  position: absolute;
+}
+
+.travel-container .sidebar .item img {
+  padding-inline-start: 15px;
+  height: 100px;
+  width: 150px;
+}
+
+.travel-container .sidebar .item > div {
+  flex-grow: 1;
+}
+
+.travel-container .sidebar .item > div > h1,
+.travel-container .sidebar .item > div > div {
+  margin: 0 10px;
+}
+
+.travel-container .sidebar .item > div > div {
+  font-size: 0.8rem;
 }
 
 .travel-container .pagination-navigator {
@@ -97,7 +120,7 @@ footer {
   }
 
   .travel-container .sidebar {
-    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
   .travel-container .weather {
@@ -112,4 +135,7 @@ footer {
 }
 
 @media screen and (min-width: 760px) {
+  .travel-container .sidebar {
+    max-width: 400px;
+  }
 }
