@@ -7,13 +7,14 @@ window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
-window.onSelectLocation = onSelectLocation;
+window.onAddLocation = onAddLocation;
 
 function onInit() {
 	mapService
 		.initMap()
 		.then(() => {
 			console.log('Map is ready');
+			renderMap();
 		})
 		.catch(() => console.log('Error: cannot init map'));
 	pageService.render(1, 10, 8);
@@ -33,9 +34,8 @@ function onAddMarker() {
 }
 
 function onGetLocs() {
-	locService.getLocs().then((locs) => {
-		console.log('Locations:', locs);
-		document.querySelector('.locs').innerText = JSON.stringify(locs);
+	return locService.getLocs().then((locs) => {
+		return locs;
 	});
 }
 
@@ -54,8 +54,17 @@ function onPanTo() {
 	console.log('Panning the Map');
 	mapService.panTo(35.6895, 139.6917);
 }
-function onSelectLocation() {
-	mapService.selectLocation();
+
+function renderMap() {
+	let strHmtl = `<div class="weather"></div>`;
+	const placeCards = document.querySelector('.sidebar');
+	const locs = onGetLocs();
+	console.log(locs);
+	placeCards.forEach((place) => {
+		// 	strHmtl += `
+		// <span>
+		// `;
+	});
 }
 
-function renderMap() {}
+function onAddLocation() {}
