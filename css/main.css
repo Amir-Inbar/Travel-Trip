@@ -126,7 +126,7 @@ body {
 }
 
 .travel-container .sidebar .item > div > h1 {
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
 .travel-container .sidebar .item > div > h1,
@@ -159,10 +159,6 @@ footer {
 @media screen and (max-width: 760px) {
   .travel-container {
     flex-direction: column;
-  }
-
-  .travel-container .map-container {
-    height: 0;
   }
 
   .travel-container .map-container #map {
