@@ -7,7 +7,7 @@ export const locService = {
 	removeLocation,
 	findPlaceByid
 };
-
+const API_KEY2 = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
 var id = 0;
 const KEY = 'saveLoc';
 const locs = storService.load(KEY) || [];
@@ -21,23 +21,22 @@ function getLocs() {
 	});
 }
 
-function setLocation(name, lat, lng, createdAt = Date.now(), api) {
+function setLocation(name, lat, lng, createdAt = new Date().toUTCString()) {
 	const location = {
 		id: id++,
 		name,
 		lat,
 		lng,
 		weather: null,
-		createdAt: new Date().toUTCString(),
+		createdAt,
 		lastUpdate: Date.now(),
-		img: `
-        https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=12&size=150x100&key=${api}
-        `
+		img: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=12&size=150x100&key=${API_KEY2}`
 	};
 	tempLoc = location;
 }
 
 function addLocation(title) {
+	console.log(tempLoc);
 	if (!tempLoc) return;
 	tempLoc.name = title;
 	locs.push(tempLoc);

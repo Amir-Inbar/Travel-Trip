@@ -12,6 +12,7 @@ window.onRemoveLocation = onRemoveLocation;
 window.onToggleNewLoaction = onToggleNewLoaction;
 window.onPaginationClick = onPaginationClick;
 window.initAutocomplete = initAutocomplete;
+window.displaySuggestions = displaySuggestions;
 
 var gLocs;
 function onInit() {
@@ -32,6 +33,7 @@ function onPaginationClick(idx = 0) {
 	var strHmtl = `<div class="weather"></div>`;
 	const elSideBar = document.querySelector('.sidebar');
 	const locations = pageService.set(idx, 4, gLocs);
+	if (!locations || !locations.length) return;
 	locations.forEach((place) => {
 		strHmtl += `
             <div class="item" onclick="onPanTo(${place.lat},${place.lng}),onToggleNewLoaction(${place.id})">
@@ -109,11 +111,6 @@ function onToggleNewLoaction(placeId) {
 	}
 }
 
-// function initAutocomplete() {
-// 	var service = new google.maps.places.AutocompleteService();
-// 	service.getQueryPredictions({ input: 'pizza in New York' }, displaySuggestions);
-// }
-
 function displaySuggestions(predictions, status) {
 	if (status === google.maps.places.PlaceServiceStatus.OK) {
 		predictions.forEach((predictions) => {
@@ -138,7 +135,12 @@ function onPlaceChanged() {
 	if (!place.geometry) {
 		document.querySelector('.autocomplete').value = '';
 	} else {
-		console.log(place.geometry);
+		const lat = place.geometry.location.lat();
+		const lng = place.geometry.location.lng();
+		onPanTo(lat, lng);
+		locService.setLocation(place.name, lat, lng);
+		locService.addLocation(place.name);
 		document.querySelector('.autocomplete').value = place.name;
+		onPaginationClick();
 	}
 }

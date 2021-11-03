@@ -30,9 +30,9 @@ function addMarker(loc) {
 	if (gMarker) gMarker.setMap(null);
 	gMarker = new google.maps.Marker({
 		position: loc,
-		map: gMap,
-		title: 'Hello World!'
+		map: gMap
 	});
+	console.log(gMarker.getTitle());
 	return gMarker;
 }
 
