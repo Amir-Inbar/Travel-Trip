@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+.hide {
+  display: none !important;
+}
+
 .grid {
   display: grid;
 }
@@ -34,12 +38,13 @@ body {
 }
 
 .travel-container .map-container {
-  margin: 10px;
-  border-radius: 5px;
   flex-grow: 2;
+  min-height: 500px;
+  margin: 10px;
 }
 
 .travel-container .map-container #map {
+  border-radius: 10px;
   height: 100%;
   width: 100%;
 }
@@ -67,12 +72,11 @@ body {
 
 .travel-container .item {
   display: flex;
-  /* flex-direction: column; */
-  min-height: 100px;
   background-color: whitesmoke;
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
+  max-height: 120px;
 }
 
 .travel-container .item > span:first-child {
@@ -89,6 +93,10 @@ body {
   flex-grow: 1;
 }
 
+.travel-container .sidebar .item > div > h1 {
+  font-size: 1.5em;
+}
+
 .travel-container .sidebar .item > div > h1,
 .travel-container .sidebar .item > div > div {
   margin: 0 10px;
@@ -99,7 +107,7 @@ body {
 }
 
 .travel-container .sidebar .item > div > div:not(:nth-child(2)) {
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .travel-container .pagination-navigator {
@@ -122,10 +130,6 @@ footer {
 
   .travel-container #map {
     min-height: 320px;
-  }
-
-  .travel-container .sidebar {
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   }
 
   .travel-container .weather {
