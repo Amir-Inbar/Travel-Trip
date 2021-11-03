@@ -1,11 +1,14 @@
-export const pageService = {
-    set: renderPagination,
-    setLength: setNumberOfItems,
+window.pagination = {
+    set: getPagination,
     setPageSize: setItemsPerPage,
 }
 
-var paginationLength = 10;
-var itemsPerPage = 5;
+export const pageService = {
+    set: getPagination,
+    setPageSize: setItemsPerPage,
+}
+
+var itemsPerPage = 3;
 
 const id = 'pagination';
 if (!document.getElementById(id)) {
@@ -19,15 +22,14 @@ if (!document.getElementById(id)) {
     head.appendChild(link);
 }
 
-function setNumberOfItems(length) {
-    paginationLength = length;
-}
-
 function setItemsPerPage(num) {
     itemsPerPage = num;
 }
 
-function renderPagination(index = 1, length = paginationLength, size = itemsPerPage) {
+function getPagination(index = 1, size = itemsPerPage, items = []) {
+    if (!items || !items.length) return;
+    items = items.slice();
+    const length = items.length;
     const page = {
         start() {
             const SIZE = Math.floor(size / 2);
@@ -49,5 +51,6 @@ function renderPagination(index = 1, length = paginationLength, size = itemsPerP
     }
     strHtml += (page.next) ? `<button onclick="onPaginationClick(${page.next})"> » </button>` : `<button class="pgndisabled"> » </button>`;
     document.querySelector('.pagination-navigator').innerHTML = strHtml;
+    return items.splice(page.start(), page.end());
 }
 
