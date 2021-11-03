@@ -37,6 +37,11 @@ body {
   background-color: transparent;
 }
 
+.travel-container .autocomplete {
+  width: calc(100% - 4rem);
+  margin: 5px;
+}
+
 .travel-container .map-container {
   flex-grow: 2;
   min-height: 500px;
@@ -79,6 +84,7 @@ body {
 }
 
 .travel-container .sidebar {
+  padding-block-start: 32px;
   flex-grow: 1;
 }
 
@@ -129,6 +135,7 @@ body {
 }
 
 .travel-container .pagination-navigator {
+  margin-block-start: 25px;
   display: flex;
   justify-content: center;
   width: 100%;
