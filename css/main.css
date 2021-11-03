@@ -50,7 +50,7 @@ body {
 
 .travel-container .map-container #map {
   border-radius: 10px;
-  height: 100%;
+  height: calc(100% - 35px);
   width: 100%;
 }
 
@@ -104,10 +104,14 @@ body {
 }
 
 .travel-container .item > span:first-child {
+  cursor: pointer;
   position: absolute;
+  z-index: 1;
 }
 
 .travel-container .sidebar .item img {
+  position: relative;
+  left: -20px;
   padding-inline-start: 15px;
   height: 100px;
   width: 150px;
@@ -123,7 +127,7 @@ body {
 
 .travel-container .sidebar .item > div > h1,
 .travel-container .sidebar .item > div > div {
-  margin: 0 10px;
+  margin: 0;
 }
 
 .travel-container .sidebar .item > div > div:nth-child(2) {
@@ -135,7 +139,6 @@ body {
 }
 
 .travel-container .pagination-navigator {
-  margin-block-start: 25px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -143,6 +146,7 @@ body {
 }
 
 footer {
+  margin-block-start: 70px;
   text-align: center;
   background-color: lightsteelblue;
   padding: 20px 0;
