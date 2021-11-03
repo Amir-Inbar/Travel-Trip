@@ -12,23 +12,26 @@ window.onRemoveLocation = onRemoveLocation;
 window.onToggleNewLoaction = onToggleNewLoaction;
 window.onPaginationClick = onPaginationClick;
 
+var gLocs;
 function onInit() {
 	mapService
 		.initMap()
 		.then(() => {
 			console.log('Map is ready');
-			toggleNewLoactionIcon();
-			onPaginationClick();
+			onToggleNewLoaction();
+			locService.getLocs().then((locations) => {
+				gLocs = locations;
+				onPaginationClick();
+			});
 		})
 		.catch(() => console.log('Error: cannot init map'));
 }
 function onPaginationClick(idx = 0) {
 	var strHmtl = `<div class="weather"></div>`;
 	const elSideBar = document.querySelector('.sidebar');
-	locService.getLocs().then((locations) => {
-		locations = pageService.set(idx, 4, locations);
-		locations.forEach((place) => {
-			strHmtl += `
+	const locations = pageService.set(idx, 4, gLocs);
+	locations.forEach((place) => {
+		strHmtl += `
             <div class="item" onclick="onPanTo(${place.lat},${place.lng}),onToggleNewLoaction(${place.id})">
             <span onclick="onRemoveLocation(${place.id})">X</span>
         <img src="${place.img}">
@@ -41,9 +44,8 @@ function onPaginationClick(idx = 0) {
         </div>
         </div>
         `;
-		});
-		elSideBar.innerHTML = strHmtl;
 	});
+	elSideBar.innerHTML = strHmtl;
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
