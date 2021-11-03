@@ -11,6 +11,7 @@ window.onAddLocation = onAddLocation;
 window.onRemoveLocation = onRemoveLocation;
 window.onToggleNewLoaction = onToggleNewLoaction;
 window.onPaginationClick = onPaginationClick;
+window.initAutocomplete = initAutocomplete;
 
 var gLocs;
 function onInit() {
@@ -22,6 +23,7 @@ function onInit() {
 			locService.getLocs().then((locations) => {
 				gLocs = locations;
 				onPaginationClick();
+				initAutocomplete();
 			});
 		})
 		.catch(() => console.log('Error: cannot init map'));
@@ -106,7 +108,29 @@ function onToggleNewLoaction(placeId) {
 	}
 }
 
+// function initAutocomplete() {
+// 	var service = new google.maps.places.AutocompleteService();
+// 	service.getQueryPredictions({ input: 'pizza in New York' }, displaySuggestions);
+// }
+
+function displaySuggestions(predictions, status) {
+	if (status === google.maps.places.PlaceServiceStatus.OK) {
+		predictions.forEach((predictions) => {
+			console.log(predictions.description);
+		});
+	}
+}
+
+let autocomplete;
 function initAutocomplete() {
-	var service = new google.maps.places.AutocompleteService();
-	service.getQueryPredictions({ input: 'pizza in New York' }, displaySuggestions);
+	autocomplete = new google.maps.places.Autocomplete(document.querySelector('.autocomplete'), {
+		types: [ 'establishment' ],
+		componentRestrictions: { country: [ 'AU' ] },
+		fields: [ 'place_id', 'geometry', 'name' ]
+	});
+	autocomplete.addListener('place_changed', onPlaceChanged);
+}
+
+function onPlaceChanged() {
+	console.log('s');
 }
