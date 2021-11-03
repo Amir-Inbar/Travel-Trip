@@ -13,13 +13,15 @@ window.onToggleNewLoaction = onToggleNewLoaction;
 window.onPaginationClick = onPaginationClick;
 window.initAutocomplete = initAutocomplete;
 window.displaySuggestions = displaySuggestions;
+window.copyClipboard = copyClipboard;
 
 var gLocs;
+
 function onInit() {
+	const start = setStartLocation() || [ 32.0749831, 34.9120554 ];
 	mapService
-		.initMap()
+		.initMap(...start)
 		.then(() => {
-			console.log('Map is ready');
 			onToggleNewLoaction(0);
 			locService.getLocs().then((locations) => {
 				gLocs = locations;
@@ -28,7 +30,9 @@ function onInit() {
 			});
 		})
 		.catch(() => console.log('Error: cannot init map'));
+	copyClipboard();
 }
+
 function onPaginationClick(idx = 0) {
 	var strHmtl = '';
 	const elSideBar = document.querySelector('.sidebar .items');
@@ -84,6 +88,7 @@ function onGetUserPos() {
 			console.log('err!!!', err);
 		});
 }
+
 function onPanTo(lat, lng) {
 	console.log('Panning the Map');
 	mapService.panTo(lat, lng);
@@ -143,4 +148,16 @@ function onPlaceChanged() {
 		document.querySelector('.autocomplete').value = place.name;
 		onPaginationClick();
 	}
+}
+
+function copyClipboard() {
+	locService.getCurrentPosLink();
+}
+
+function setStartLocation() {
+	const search = window.location.search;
+	if (!search.includes('lat') || !search.includes('lng')) return;
+	const lat = search.substr(search.indexOf('lat') + 4, search.indexOf('&') - 5);
+	const lng = search.substr(search.indexOf('lng') + 4, search.indexOf('&') - 5);
+	return [ parseFloat(lat), parseFloat(lng) ];
 }

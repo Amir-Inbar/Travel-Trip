@@ -28,8 +28,8 @@
 }
 
 .pagination-navigator .pgnactive {
-  color: white;
-  background-color: lightslategray;
+  color: darkblue;
+  background-color: lightsteelblue;
   transform: scale(115%);
 }
 

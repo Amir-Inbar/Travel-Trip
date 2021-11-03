@@ -8,6 +8,7 @@ export const locService = {
 	findPlaceByid,
 	getFetch
 };
+
 const API_KEY2 = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
 const API_WEATHER = '0fd6d4b7116d27c353beaa8a65f0d88a';
 
@@ -57,6 +58,13 @@ function removeLocation(placeId) {
 
 function findPlaceByid(placeId) {
 	return locs.find((location) => location.id === placeId);
+}
+
+function getCurrentPosLink() {
+	if (!tempLoc) return;
+	return navigator.clipboard.writeText(
+		`https://amir-inbar.github.io/Travel-Trip/index.html?lat=${tempLoc.lat}&lng=${tempLoc.lng}`
+	);
 }
 function getWeather() {
 	var url = `https://api.openweathermap.org/data/2.5/find?lat={lat}&lon={lon}&cnt={cnt}&appid=${API_WEATHER}`;

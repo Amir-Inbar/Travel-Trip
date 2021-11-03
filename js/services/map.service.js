@@ -8,7 +8,8 @@ export const mapService = {
 const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
 var gMap;
 var gMarker;
-function initMap(lat = 32.0749831, lng = 34.9120554) {
+
+function initMap(lat, lng) {
 	console.log('InitMap');
 	return _connectGoogleApi().then(() => {
 		console.log('google available');
@@ -18,7 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 		});
 		gMap.addListener('click', (e) => {
 			addMarker(e.latLng);
-			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now());
+			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now(), API_KEY);
 			onToggleNewLoaction();
 		});
 		console.log('Map!', gMap);
@@ -31,7 +32,6 @@ function addMarker(loc) {
 		position: loc,
 		map: gMap
 	});
-	console.log(gMarker.getTitle());
 	return gMarker;
 }
 
