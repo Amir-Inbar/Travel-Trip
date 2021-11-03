@@ -1,25 +1,22 @@
-
-
 export const mapService = {
     initMap,
     addMarker,
-    panTo
-}
+    panTo,
+    selectLocation
+};
 
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
-    return _connectGoogleApi()
-        .then(() => {
-            console.log('google available');
-            gMap = new google.maps.Map(
-                document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
-            console.log('Map!', gMap);
-        })
+    return _connectGoogleApi().then(() => {
+        console.log('google available');
+        gMap = new google.maps.Map(document.querySelector('#map'), {
+            center: { lat, lng },
+            zoom: 15
+        });
+        console.log('Map!', gMap);
+    });
 }
 
 function addMarker(loc) {
@@ -36,11 +33,9 @@ function panTo(lat, lng) {
     gMap.panTo(laLatLng);
 }
 
-
-
 function _connectGoogleApi() {
-    if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    if (window.google) return Promise.resolve();
+    const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -48,6 +43,17 @@ function _connectGoogleApi() {
 
     return new Promise((resolve, reject) => {
         elGoogleApi.onload = resolve;
-        elGoogleApi.onerror = () => reject('Google script failed to load')
-    })
+        elGoogleApi.onerror = () => reject('Google script failed to load');
+    });
+}
+
+function selectLocation() {
+    // const map = new google.maps.Map(document.querySelector('#map'), {
+    // 	zoom: 4,
+    // 	center: { lat: -25, lng: 131 }
+    // });
+    gMap.addListener('click', (e) => {
+        console.log(gMap);
+        addMarker(e.latLng);
+    });
 }
