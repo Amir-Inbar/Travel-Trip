@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.align-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.travel-container {
+  background-color: lightsteelblue;
+}
+
+.travel-container #map {
+  margin: 10px;
+  border-radius: 5px;
+  flex-grow: 2;
+}
+
+.travel-container .list {
+  flex-grow: 1;
+}
+
+.travel-container .list .item {
+  min-height: 100px;
+  background-color: whitesmoke;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.travel-container .pagination-navigator {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 2.5rem;
+}
