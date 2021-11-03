@@ -22,23 +22,14 @@
                 Search: <input class="autocomplete" name="autocomplete" type="text">
             </label>
             <div id="map"></div>
-            <img class="my-loc" onclick="onAddLocation()" src="./img/mylocation.png">
+            <img class="my-loc" onclick="onGetUserPos()" src="./img/mylocation.png">
             <img class="add-loc" onclick="onAddLocation()" src="./img/add.png">
         </div>
         <div class="sidebar">
-            <div class="weather"></div>
+            <div class="weather hide"></div>
         </div>
         <div class="pagination-navigator"></div>
     </div>
-    
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
-    
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
-
     <footer>
         <p class="copyrights">© Copyrights</p>
     </footer>

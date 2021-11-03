@@ -50,7 +50,7 @@ body {
 
 .travel-container .map-container #map {
   border-radius: 10px;
-  height: 100%;
+  height: calc(100% - 35px);
   width: 100%;
 }
 
@@ -92,9 +92,14 @@ body {
   margin: 10px;
   border-radius: 5px;
   background-color: lightskyblue;
+  position: relative;
+  top: -32px;
+  height: 180px;
+  margin-bottom: -32px;
 }
 
 .travel-container .item {
+  user-select: none;
   display: flex;
   background-color: whitesmoke;
   margin: 10px;
@@ -103,11 +108,13 @@ body {
   max-height: 120px;
 }
 
-.travel-container .item > span:first-child {
-  position: absolute;
+.travel-container .item > span {
+  cursor: pointer;
 }
 
 .travel-container .sidebar .item img {
+  position: relative;
+  left: -20px;
   padding-inline-start: 15px;
   height: 100px;
   width: 150px;
@@ -123,19 +130,18 @@ body {
 
 .travel-container .sidebar .item > div > h1,
 .travel-container .sidebar .item > div > div {
-  margin: 0 10px;
+  margin: 0;
 }
 
 .travel-container .sidebar .item > div > div:nth-child(2) {
-  font-size: 0.7em;
-}
-
-.travel-container .sidebar .item > div > div:not(:nth-child(2)) {
   font-size: 0.8em;
 }
 
+.travel-container .sidebar .item > div > div:not(:nth-child(2)) {
+  font-size: 0.7em;
+}
+
 .travel-container .pagination-navigator {
-  margin-block-start: 25px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -143,6 +149,7 @@ body {
 }
 
 footer {
+  margin-block-start: 70px;
   text-align: center;
   background-color: lightsteelblue;
   padding: 20px 0;
