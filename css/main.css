@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  min-height: calc(100vh - 170px);
 }
 
 .hide {
@@ -158,12 +159,16 @@ body {
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
   user-select: none;
   color: darkblue;
   margin-block-start: 70px;
+  height: 100px;
   text-align: center;
   background-color: lightsteelblue;
   padding: 20px 0;
+  width: 100%;
 }
 
 @media screen and (max-width: 760px) {

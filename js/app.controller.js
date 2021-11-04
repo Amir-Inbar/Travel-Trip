@@ -18,7 +18,7 @@ window.copyClipboard = copyClipboard;
 var gLocs;
 
 function onInit() {
-	const start = setStartLocation() || [ 32.0749831, 34.9120554 ];
+	const start = setStartLocation() || [32.0749831, 34.9120554];
 	mapService
 		.initMap(...start)
 		.then(() => {
@@ -36,7 +36,7 @@ function onInit() {
 function onPaginationClick(idx = 0) {
 	var strHmtl = '';
 	const elSideBar = document.querySelector('.sidebar .items');
-	const locations = pageService.set(idx, 4, gLocs);
+	const locations = pageService.set(idx, gLocs, 4);
 	if (!locations || !locations.length) return;
 	locations.forEach((place) => {
 		strHmtl += `
@@ -125,9 +125,9 @@ function displaySuggestions(predictions, status) {
 let autocomplete;
 function initAutocomplete() {
 	autocomplete = new google.maps.places.Autocomplete(document.querySelector('.autocomplete'), {
-		types: [ 'establishment' ],
-		componentRestrictions: { country: [ 'ISR' ] },
-		fields: [ 'place_id', 'geometry', 'name' ]
+		types: ['establishment'],
+		componentRestrictions: { country: ['ISR'] },
+		fields: ['place_id', 'geometry', 'name']
 	});
 	autocomplete.addListener('place_changed', onPlaceChanged);
 }
@@ -157,5 +157,5 @@ function setStartLocation() {
 	if (!search.includes('lat') || !search.includes('lng')) return;
 	const lat = search.substr(search.indexOf('lat') + 4, search.indexOf('&') - 5);
 	const lng = search.substr(search.indexOf('lng') + 4, search.indexOf('&') - 5);
-	return [ parseFloat(lat), parseFloat(lng) ];
+	return [parseFloat(lat), parseFloat(lng)];
 }
