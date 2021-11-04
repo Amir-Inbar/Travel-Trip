@@ -1,8 +1,3 @@
-window.pagination = {
-    set: getPagination,
-    setPageSize: setItemsPerPage,
-}
-
 export const pageService = {
     set: getPagination,
     setPageSize: setItemsPerPage,
@@ -26,7 +21,7 @@ function setItemsPerPage(num) {
     itemsPerPage = num;
 }
 
-function getPagination(index = 0, size = itemsPerPage, items = []) {
+function getPagination(index = 0, items = [], size = itemsPerPage) {
     if (!items || !items.length) return;
     items = items.slice();
     const length = Math.ceil(items.length / size);

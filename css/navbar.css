@@ -28,10 +28,10 @@
 
 @keyframes openlogo {
   0% {
-    transform: scale(0%);
+    transform: scaleY(0%);
   }
   100% {
-    transform: scale(100%);
+    transform: scaleY(100%);
   }
 }
 
@@ -49,7 +49,7 @@
 /* set interface */
 
 .main-header .logo {
-  color: blue;
+  color: darkblue;
   font-size: 2.5rem;
   flex-grow: 1;
 }
