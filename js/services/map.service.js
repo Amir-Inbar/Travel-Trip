@@ -22,6 +22,9 @@ function initMap(lat, lng) {
 			locService.setLocation('amir', e.latLng.lat(), e.latLng.lng(), Date.now(), API_KEY);
 			onToggleNewLoaction();
 		});
+		// gMap.addEventListener('mapsMouseEvent', (e) => {
+		// 	console.log(e);
+		// });
 		console.log('Map!', gMap);
 	});
 }
