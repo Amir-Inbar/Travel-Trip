@@ -5,7 +5,7 @@ export const mapService = {
 	addMarker,
 	panTo
 };
-const API_KEY = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
+const API_KEY = 'AIzaSyC5AdyF7bsIu-MHECxquQ5JEDaP0yS0ILQ';
 var gMap;
 var gMarker;
 

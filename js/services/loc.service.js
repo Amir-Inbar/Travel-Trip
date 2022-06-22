@@ -10,7 +10,7 @@ export const locService = {
 	getCurrentPosLink
 };
 
-const API_KEY2 = 'AIzaSyCsws2HKpTeFtrOSEHhq1Elss5JpUYK4pQ';
+const API_KEY2 = 'AIzaSyC5AdyF7bsIu-MHECxquQ5JEDaP0yS0ILQ';
 const API_WEATHER = '0fd6d4b7116d27c353beaa8a65f0d88a';
 
 var id = 0;
